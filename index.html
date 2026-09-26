@@ -3,483 +3,1001 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PLAYER_02</title>
+<title>PLAYER_02.exe</title>
 
 <style>
-* {
-    box-sizing: border-box;
+*{box-sizing:border-box}
+
+:root{
+  --bg:#050505;
+  --text:#eeeeee;
+  --dim:#666;
+  --line:#292929;
+  --green:#65ff8f;
+  --red:#ff6262;
 }
 
-body {
-    margin: 0;
-    background: #050505;
-    color: #eeeeee;
-    font-family: "Courier New", monospace;
-    min-height: 100vh;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Courier New",monospace;
+  min-height:100vh;
 }
 
-.screen {
-    width: min(92%, 520px);
-    margin: auto;
-    padding: 55px 0 80px;
+.screen{
+  width:min(90%,520px);
+  margin:auto;
+  padding:55px 0 80px;
+  min-height:100vh;
 }
 
-.hidden {
-    display: none;
+.hidden{display:none!important}
+
+.green{color:var(--green)}
+.red{color:var(--red)}
+.dim{color:var(--dim)}
+
+.big{
+  font-size:30px;
+  line-height:1.45;
+  letter-spacing:2px;
+}
+
+.tiny{
+  font-size:11px;
+  letter-spacing:1px;
+  color:#555;
+}
+
+.divider{
+  border:0;
+  border-top:1px solid var(--line);
+  margin:35px 0;
+}
+
+button{
+  background:transparent;
+  color:var(--text);
+  border:1px solid #555;
+  padding:14px 20px;
+  font-family:inherit;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+
+button:hover{
+  border-color:var(--green);
+  color:var(--green);
+}
+
+.fade{
+  animation:fade .7s ease forwards;
+}
+
+@keyframes fade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@keyframes blink{
+  50%{opacity:.2}
+}
+
+@keyframes glow{
+  from{box-shadow:0 0 0 rgba(101,255,143,0)}
+  to{box-shadow:0 0 20px rgba(101,255,143,.18)}
 }
 
 /* BOOT */
 
-#boot {
-    color: #bdbdbd;
-    font-size: 14px;
-    line-height: 2;
+.boot-line{
+  opacity:0;
+  line-height:2;
+  font-size:14px;
+  animation:appear .25s forwards;
 }
 
-.boot-line {
-    opacity: 0;
-    animation: appear .3s forwards;
+@keyframes appear{
+  to{opacity:1}
 }
 
-@keyframes appear {
-    to { opacity: 1; }
+.cursor{
+  display:inline-block;
+  color:var(--green);
+  animation:blink 1s infinite;
 }
 
-.green {
-    color: #65ff8f;
+/* ORIGIN */
+
+.origin-box{
+  border:1px solid #333;
+  padding:25px;
+  margin-top:35px;
 }
 
-.dim {
-    color: #666;
+.origin-date{
+  font-size:35px;
+  letter-spacing:4px;
+  margin:15px 0 30px;
 }
 
-.big {
-    font-size: 28px;
-    letter-spacing: 2px;
+.origin-copy{
+  line-height:1.9;
 }
 
-button {
-    background: transparent;
-    color: #eee;
-    border: 1px solid #555;
-    font-family: inherit;
-    padding: 14px 22px;
-    cursor: pointer;
-    letter-spacing: 2px;
+.origin-reveal{
+  margin-top:45px;
+  color:#888;
+  line-height:2;
+  font-style:italic;
 }
 
-button:hover {
-    border-color: #65ff8f;
-    color: #65ff8f;
+/* TRANSITION */
+
+.center{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:80vh;
 }
 
 /* DASHBOARD */
 
-.header {
-    margin-bottom: 40px;
+.header{
+  margin-bottom:45px;
 }
 
-.status {
-    color: #65ff8f;
-    font-size: 12px;
+.status{
+  color:var(--green);
+  font-size:12px;
+  letter-spacing:1px;
 }
 
-.progress {
-    height: 4px;
-    background: #222;
-    margin-top: 12px;
+.player-one{
+  font-size:11px;
+  color:#555;
+  margin-top:8px;
 }
 
-.progress-bar {
-    height: 100%;
-    width: 30%;
-    background: #65ff8f;
+.progress{
+  height:4px;
+  background:#222;
+  margin-top:12px;
 }
 
-.level {
-    border-top: 1px solid #222;
-    padding: 30px 0;
+.progress-bar{
+  width:30%;
+  height:100%;
+  background:var(--green);
 }
 
-.level-title {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    letter-spacing: 2px;
+.event{
+  border-top:1px solid var(--line);
+  padding:32px 0;
 }
 
-.date {
-    color: #777;
-    font-size: 12px;
-    margin-top: 6px;
+.event-title{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  font-size:14px;
+  letter-spacing:2px;
 }
 
-.memory {
-    margin-top: 20px;
-    line-height: 1.8;
+.date{
+  margin-top:8px;
+  color:#777;
+  font-size:12px;
 }
 
-.quote {
-    color: #777;
-    font-style: italic;
-    font-size: 13px;
+.memory{
+  margin-top:22px;
+  line-height:2;
 }
 
-.locked {
-    color: #555;
+.quote{
+  margin-top:22px;
+  color:#666;
+  font-size:13px;
+  font-style:italic;
+  line-height:1.7;
 }
 
-.mission {
-    border: 1px solid #333;
-    padding: 22px;
-    margin-top: 25px;
+/* MISSION */
+
+.mission{
+  border:1px solid #333;
+  padding:24px;
+  margin-top:25px;
 }
 
-input {
-    width: 100%;
-    margin-top: 15px;
-    background: #0b0b0b;
-    border: 1px solid #333;
-    padding: 14px;
-    color: #65ff8f;
-    font-family: inherit;
-    letter-spacing: 5px;
-    text-align: center;
-    font-size: 18px;
+input{
+  width:100%;
+  background:#0b0b0b;
+  border:1px solid #333;
+  color:var(--green);
+  padding:15px;
+  text-align:center;
+  font-family:inherit;
+  font-size:19px;
+  letter-spacing:6px;
+  margin:15px 0;
 }
 
-#response {
-    margin-top: 15px;
-    min-height: 40px;
-    font-size: 13px;
+#response{
+  min-height:38px;
+  margin-top:16px;
+  font-size:12px;
+  line-height:1.7;
 }
 
-.unlocked {
-    border: 1px solid #65ff8f;
-    padding: 25px;
-    margin-top: 25px;
-    animation: glow 1.5s infinite alternate;
+.hint-button{
+  border:0;
+  padding:5px 0;
+  color:#555;
+  font-size:10px;
+  margin-top:12px;
 }
 
-@keyframes glow {
-    from { box-shadow: 0 0 0px #65ff8f; }
-    to { box-shadow: 0 0 15px rgba(101,255,143,.2); }
+.hint-button:hover{
+  color:#888;
+  border:0;
+}
+
+#hintText{
+  color:#777;
+  font-size:12px;
+  line-height:1.7;
+  margin-top:12px;
+}
+
+/* UNLOCK */
+
+.unlock-number{
+  font-size:45px;
+  letter-spacing:3px;
+  color:var(--green);
+}
+
+.loading{
+  height:4px;
+  width:100%;
+  background:#222;
+  margin:25px 0;
+  overflow:hidden;
+}
+
+.loading-fill{
+  width:0;
+  height:100%;
+  background:var(--green);
+}
+
+.loading-fill.go{
+  animation:load 2s forwards;
+}
+
+@keyframes load{
+  to{width:100%}
+}
+
+/* ROUTES */
+
+.route{
+  border:1px solid #333;
+  padding:20px;
+  margin:18px 0;
+}
+
+.route h3{
+  margin-top:0;
+  font-size:15px;
+  letter-spacing:1px;
+}
+
+.route p{
+  color:#888;
+  font-size:13px;
+  line-height:1.7;
+}
+
+.custom{
+  border-style:dashed;
+}
+
+.bonus{
+  margin-top:35px;
+  border:1px solid #24472e;
+  padding:22px;
+}
+
+.final-line{
+  margin-top:55px;
+  line-height:2;
 }
 </style>
 </head>
 
 <body>
 
-<!-- BOOT SCREEN -->
+<!-- ===================== -->
+<!-- BOOT -->
+<!-- ===================== -->
 
-<div id="boot" class="screen">
+<section id="boot" class="screen">
 
-<div class="boot-line" style="animation-delay:.5s">
-> INITIALIZING PLAYER_02...
-</div>
+  <div class="boot-line" style="animation-delay:.4s">
+    > INITIALIZING PLAYER_02...
+  </div>
 
-<div class="boot-line" style="animation-delay:1.4s">
-> SEARCHING MEMORY DATABASE...
-</div>
+  <div class="boot-line" style="animation-delay:1.2s">
+    > IDENTITY FOUND.
+  </div>
 
-<div class="boot-line green" style="animation-delay:2.5s">
-> DATABASE CONNECTED ✓
-</div>
+  <div class="boot-line" style="animation-delay:2s">
+    > SEARCHING MEMORY DATABASE...
+  </div>
 
-<div class="boot-line" style="animation-delay:3.4s">
-> 3 EVENTS FOUND.
-</div>
+  <div class="boot-line green" style="animation-delay:3s">
+    > 1 ORIGIN EVENT FOUND.
+  </div>
 
-<div class="boot-line dim" style="animation-delay:4.2s">
-05.06.26
-</div>
+  <div class="boot-line green" style="animation-delay:3.8s">
+    > MEMORY RECOVERED ✓
+  </div>
 
-<div class="boot-line dim" style="animation-delay:4.7s">
-30.07.26
-</div>
+  <div class="boot-line dim" style="animation-delay:4.6s">
+    SESSION_0506 // ACTIVE
+  </div>
 
-<div class="boot-line dim" style="animation-delay:5.2s">
-30.09.26
-</div>
+  <div class="boot-line" style="animation-delay:5.6s;margin-top:35px">
+    <div id="welcomeText" class="big">
+      PLAYER 02<br>IDENTIFIED.
+    </div>
 
-<div class="boot-line green" style="animation-delay:6.2s">
-> SESSION RESTORED.
-</div>
+    <br><br>
 
-<div class="boot-line" style="animation-delay:7.2s; margin-top:35px;">
-<div class="big">WELCOME BACK,<br>PLAYER 02.</div>
+    <button onclick="openOrigin()">
+      [ ACCESS MEMORY ]
+    </button>
+  </div>
 
-<br><br>
+</section>
 
-<button onclick="enterGame()">[ ENTER ]</button>
-</div>
 
-</div>
+<!-- ===================== -->
+<!-- ORIGIN MEMORY -->
+<!-- ===================== -->
 
+<section id="origin" class="screen hidden">
 
-<!-- GAME -->
+  <div class="tiny">
+    MEMORY DATABASE // FILE_00
+  </div>
 
-<div id="game" class="screen hidden">
+  <div class="green" style="margin-top:25px">
+    ORIGIN MEMORY RECOVERED ✓
+  </div>
 
-<div class="header">
+  <div class="origin-date">
+    05.06.26
+  </div>
 
-<div class="status">
-● PLAYER 02 // ONLINE
-</div>
+  <div class="origin-box">
 
-<h1>JORGE.exe</h1>
+    <div class="tiny">
+      ORIGIN EVENT
+    </div>
 
-<div class="dim">
-GAME PROGRESS // 30%
-</div>
+    <div class="memory">
+      💋 FIRST CONTACT<br>
+      🍾 FIRST ITEM ACQUIRED
+    </div>
 
-<div class="progress">
-<div class="progress-bar"></div>
-</div>
+    <hr class="divider">
 
-</div>
+    <div class="origin-copy">
+      No levels.<br>
+      No missions.<br>
+      No players.<br><br>
 
+      <span class="dim">Not yet.</span>
+    </div>
 
-<!-- LEVEL 00 -->
+  </div>
 
-<div class="level">
+  <div class="origin-reveal">
+    This happened before the game existed.<br><br>
 
-<div class="level-title">
-<span>LEVEL 00 // ORIGIN EVENT</span>
-<span>🔓</span>
-</div>
+    Or at least...<br><br>
 
-<div class="date">
-05.06.26
-</div>
+    before you knew it did.
+  </div>
 
-<div class="memory">
-🍾 ITEM ACQUIRED<br>
-💋 FIRST CONTACT
-</div>
+  <br><br>
 
-<p class="quote">
-"You didn't know the game had started."
-</p>
+  <button onclick="archiveOrigin()">
+    [ CONTINUE ]
+  </button>
 
-</div>
+</section>
 
 
-<!-- SIDE QUEST -->
+<!-- ===================== -->
+<!-- GAME INITIALIZATION -->
+<!-- ===================== -->
 
-<div class="level">
+<section id="transition" class="screen hidden center">
 
-<div class="level-title">
-<span>SIDE QUEST // COMPLETED</span>
-<span>✓</span>
-</div>
+  <div id="transitionText">
 
-<div class="date">
-30.07.26
-</div>
+    <p>> ORIGIN MEMORY ARCHIVED ✓</p>
 
-<div class="memory">
-🧱 MESSI BUILD<br>
-⚽ CO-OP COMPLETED
-</div>
+    <p class="dim">
+      > SEARCHING FOR PATTERN...
+    </p>
 
-<p class="quote">
-"Two players required."
-</p>
+    <p class="green">
+      > 2 EVENTS DETECTED.
+    </p>
 
-</div>
+    <br>
 
+    <p>
+      > INITIALIZING GAME<span class="cursor">_</span>
+    </p>
 
-<!-- LEVEL 01 -->
+  </div>
 
-<div class="level">
+</section>
 
-<div class="level-title">
-<span>LEVEL 01 // NEW RIDE</span>
-<span>🔓</span>
-</div>
 
-<div class="date">
-30.09.26
-</div>
+<!-- ===================== -->
+<!-- DASHBOARD -->
+<!-- ===================== -->
 
-<div class="memory">
-🏎️ NEW CAR ACQUIRED
-</div>
+<section id="game" class="screen hidden">
 
-<p>
-You've unlocked a new ride.
-</p>
+  <div class="header">
 
-<p class="dim">
-But your next skill is still locked.
-</p>
+    <div class="status">
+      ● PLAYER 02 // ONLINE
+    </div>
 
-</div>
+    <div class="player-one">
+      PLAYER 01 // IDENTITY: CLASSIFIED
+    </div>
 
+    <h1>PLAYER_02.exe</h1>
 
-<!-- LEVEL 02 -->
+    <div class="dim">
+      GAME PROGRESS // 30%
+    </div>
 
-<div class="level">
+    <div class="progress">
+      <div class="progress-bar"></div>
+    </div>
 
-<div class="level-title locked">
-<span>LEVEL 02</span>
-<span>🔒</span>
-</div>
+  </div>
 
-<div class="date">
-DATE: ??.??.??<br>
-SKILL: ????????
-</div>
 
+  <!-- EVENT 01 -->
 
-<div class="mission">
+  <div class="event">
 
-<div class="green">
-[ ACTIVE MISSION ]
-</div>
+    <div class="event-title">
+      <span>EVENT 01 // CO-OP</span>
+      <span>✓</span>
+    </div>
 
-<p>
-Three events have already happened.
-</p>
+    <div class="date">
+      30.07.26
+    </div>
 
-<p class="dim">
-One started the game.<br>
-One established a pattern.<br>
-One made you notice it.
-</p>
+    <div class="memory">
+      🧱 ITEM ACQUIRED<br>
+      ⚽ MESSI BUILD<br>
+      PLAYERS REQUIRED: 02
+    </div>
 
-<p>
-05.06.26<br>
-30.07.26<br>
-30.09.26<br>
-??.??.??
-</p>
+    <p class="quote">
+      "A pattern doesn't exist until it repeats."
+    </p>
 
-<p>
-Find what comes next.
-</p>
+  </div>
 
-<input
-id="code"
-maxlength="6"
-inputmode="numeric"
-placeholder="______"
->
 
-<br><br>
+  <!-- LEVEL 01 -->
 
-<button onclick="checkCode()">
-UNLOCK
-</button>
+  <div class="event">
 
-<div id="response"></div>
+    <div class="event-title">
+      <span>LEVEL 01 // NEW RIDE</span>
+      <span>🔓</span>
+    </div>
 
-</div>
+    <div class="date">
+      30.09.26
+    </div>
 
+    <div class="memory">
+      🏎️ NEW CAR ACQUIRED
+    </div>
 
-<div id="level2" class="unlocked hidden">
+    <p>
+      You've unlocked a new ride.
+    </p>
 
-<div class="green">
-ACCESS GRANTED ✓
-</div>
+    <p class="quote">
+      Once is random.<br>
+      Twice is a coincidence.<br>
+      Three times...?
+    </p>
 
-<h2>LEVEL 02 IDENTIFIED</h2>
+  </div>
 
-<h1>30.12.26</h1>
 
-<p>
-🎧 NEW SKILL DETECTED
-</p>
+  <!-- LEVEL 02 -->
 
-<p>
-STATUS: 🔒 LOCKED
-</p>
+  <div class="event">
 
-<br>
+    <div class="event-title dim">
+      <span>LEVEL 02</span>
+      <span>🔒</span>
+    </div>
 
-<p class="dim">
-Finding the level isn't the same as unlocking it.
-</p>
+    <div class="date">
+      DATE: ??.??.??<br>
+      STATUS: UNKNOWN
+    </div>
 
-<hr style="border:0;border-top:1px solid #333;margin:30px 0;">
 
-<p>
-MISSION 02
-</p>
+    <div class="mission">
 
-<h2>
-🇲🇽 + 🎧 + 🇵🇪
-</h2>
+      <div class="green">
+        [ ACTIVE MISSION ]
+      </div>
 
-<p>
-Make them sound good together.
-</p>
+      <p>
+        A pattern has been detected.
+      </p>
 
-</div>
+      <p style="line-height:1.8">
+        30.07.26<br>
+        30.09.26<br>
+        ??.??.??
+      </p>
 
-</div>
+      <p class="dim">
+        Something repeats.<br>
+        Something changes.
+      </p>
 
-</div>
+      <p>
+        Find what comes next.
+      </p>
+
+      <input
+        id="code"
+        maxlength="6"
+        inputmode="numeric"
+        placeholder="______"
+      >
+
+      <button onclick="checkCode()">
+        UNLOCK
+      </button>
+
+      <div id="response"></div>
+
+      <button class="hint-button" onclick="getHint()">
+        REQUEST HINT <span id="hintCounter">[0/2]</span>
+      </button>
+
+      <div id="hintText"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ===================== -->
+<!-- ACCESS GRANTED -->
+<!-- ===================== -->
+
+<section id="unlock" class="screen hidden center">
+
+  <div class="green">
+    ACCESS CODE ACCEPTED.
+  </div>
+
+  <br>
+
+  <div>
+    > PATTERN CONFIRMED ✓
+  </div>
+
+  <div class="loading">
+    <div id="loadingFill" class="loading-fill"></div>
+  </div>
+
+  <div id="unlockReveal" class="hidden fade">
+
+    <p class="dim">
+      LEVEL 02 LOCATED.
+    </p>
+
+    <div class="unlock-number">
+      30.12.26
+    </div>
+
+    <br>
+
+    <p>
+      NEW SKILL DETECTED.
+    </p>
+
+    <div style="font-size:40px">
+      🎧
+    </div>
+
+    <p>
+      STATUS: 🔒 LOCKED
+    </p>
+
+    <br>
+
+    <p class="dim">
+      Finding the level isn't the same as unlocking it.
+    </p>
+
+    <br>
+
+    <button onclick="openMission()">
+      [ VIEW UNLOCK REQUIREMENT ]
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ===================== -->
+<!-- WEEKEND MISSION -->
+<!-- ===================== -->
+
+<section id="weekend" class="screen hidden">
+
+  <div class="green">
+    CO-OP MISSION AVAILABLE
+  </div>
+
+  <p class="tiny">
+    BONUS WINDOW // 02.10.26 — 04.10.26
+  </p>
+
+  <br>
+
+  <h2>MISSION_01</h2>
+
+  <p style="line-height:1.8">
+    Classes have started.<br>
+    Time together is about to become harder to find.
+  </p>
+
+  <br>
+
+  <p>
+    <strong>MISSION:</strong>
+  </p>
+
+  <p class="big" style="font-size:22px">
+    Make one memory before life gets busy.
+  </p>
+
+  <p class="dim">
+    PLAYER 02 chooses the route.
+  </p>
+
+
+  <!-- ROUTE A -->
+
+  <div class="route">
+
+    <h3>🌲 ROUTE A // TOUCH GRASS</h3>
+
+    <p>
+      Get out of the city.<br>
+      Pick a place.<br>
+      Bring something to eat.
+    </p>
+
+    <div class="tiny">
+      BONUS XP AVAILABLE // 🎧
+    </div>
+
+  </div>
+
+
+  <!-- ROUTE B -->
+
+  <div class="route">
+
+    <h3>🌃 ROUTE B // AFTER HOURS</h3>
+
+    <p>
+      Plan something after sunset.<br>
+      No usual spots.
+    </p>
+
+  </div>
+
+
+  <!-- ROUTE C -->
+
+  <div class="route">
+
+    <h3>🎲 ROUTE C // CHAOS MODE</h3>
+
+    <p>
+      Do absolutely whatever you want.
+    </p>
+
+    <div class="tiny">
+      ONE RULE // PLAYER 01 CAN'T KNOW BEFOREHAND.
+    </div>
+
+  </div>
+
+
+  <!-- CUSTOM -->
+
+  <div class="route custom">
+
+    <h3>＋ CREATE YOUR OWN MISSION</h3>
+
+    <p>
+      Requirements:
+    </p>
+
+    <p>
+      01 // We do it together.<br>
+      02 // You choose.<br>
+      03 // I don't know what we're doing.
+    </p>
+
+    <div class="tiny">
+      THAT'S IT.
+    </div>
+
+  </div>
+
+
+  <!-- NO PRESSURE -->
+
+  <hr class="divider">
+
+  <p class="dim" style="line-height:1.8">
+    The bonus window is optional.<br>
+    Mission_01 does not expire.
+  </p>
+
+  <p class="tiny">
+    GOOD THINGS DON'T NEED A DEADLINE.
+  </p>
+
+
+  <!-- BONUS -->
+
+  <div class="bonus">
+
+    <div class="green">
+      SECRET BONUS // +30 XP
+    </div>
+
+    <br>
+
+    <div style="font-size:30px">
+      🇲🇽 + 🎧 + 🇵🇪
+    </div>
+
+    <p>
+      Make them sound good together.
+    </p>
+
+    <p class="dim">
+      One from you.<br>
+      One from her.<br>
+      One that belongs to both.
+    </p>
+
+  </div>
+
+
+  <div class="final-line">
+
+    <div class="tiny">
+      PLAYER 02
+    </div>
+
+    <p>
+      You're in control now.
+    </p>
+
+    <p class="green">
+      Surprise me.
+    </p>
+
+  </div>
+
+  <br><br>
+
+  <div class="tiny">
+    SESSION_0506 // CONNECTION SECURE
+  </div>
+
+</section>
 
 
 <script>
 
-function enterGame() {
-    document.getElementById("boot").classList.add("hidden");
-    document.getElementById("game").classList.remove("hidden");
-    window.scrollTo(0,0);
+/* FIRST VISIT MEMORY */
+
+const visited = localStorage.getItem("player02_visited");
+
+if(visited){
+  document.getElementById("welcomeText").innerHTML =
+    "WELCOME BACK,<br>PLAYER 02.";
+
+  const lines = document.querySelectorAll(".boot-line");
+
+  if(lines[1]){
+    lines[1].innerHTML = "> IDENTITY CONFIRMED.";
+  }
 }
 
+
+/* NAVIGATION */
+
+function showOnly(id){
+
+  document
+    .querySelectorAll(".screen")
+    .forEach(screen => screen.classList.add("hidden"));
+
+  document
+    .getElementById(id)
+    .classList.remove("hidden");
+
+  window.scrollTo(0,0);
+}
+
+
+function openOrigin(){
+
+  localStorage.setItem("player02_visited","yes");
+
+  showOnly("origin");
+}
+
+
+function archiveOrigin(){
+
+  showOnly("transition");
+
+  setTimeout(function(){
+    showOnly("game");
+  },3000);
+
+}
+
+
+/* ACCESS CODE */
+
 const fails = [
-    "ACCESS DENIED // Not even close, güey.",
-    "ACCESS DENIED // DJ skills ≠ puzzle skills apparently.",
-    "ACCESS DENIED // Don't ask Mariana. That's cheating.",
-    "ACCESS DENIED // Try again, Player 02.",
-    "ERROR 404 // Brain not found."
+  "ACCESS DENIED // Not even close, güey.",
+  "ACCESS DENIED // DJ skills ≠ puzzle skills apparently.",
+  "ACCESS DENIED // Player 01 is disappointed.",
+  "ACCESS DENIED // Nice try, Player 02.",
+  "ERROR 404 // Brain not found."
 ];
 
 let attempts = 0;
 
-function checkCode() {
 
-    const input = document
-        .getElementById("code")
-        .value
-        .replace(/\D/g,'');
+function checkCode(){
 
-    const response = document.getElementById("response");
+  const code = document
+    .getElementById("code")
+    .value
+    .replace(/\D/g,"");
 
-    if(input === "301226") {
+  const response =
+    document.getElementById("response");
 
-        response.innerHTML =
-        '<span class="green">ACCESS CODE ACCEPTED.</span>';
 
-        setTimeout(function() {
+  if(code === "301226"){
 
-            document
-                .getElementById("level2")
-                .classList.remove("hidden");
+    response.innerHTML =
+      '<span class="green">ACCESS CODE ACCEPTED.</span>';
 
-            document
-                .getElementById("level2")
-                .scrollIntoView({
-                    behavior:"smooth"
-                });
+    setTimeout(function(){
 
-        },800);
+      showOnly("unlock");
 
-    } else {
+      document
+        .getElementById("loadingFill")
+        .classList.add("go");
 
-        response.innerHTML =
-        '<span style="color:#ff5f5f">' +
-        fails[attempts % fails.length] +
-        '</span>';
+      setTimeout(function(){
 
-        attempts++;
+        document
+          .getElementById("unlockReveal")
+          .classList.remove("hidden");
 
-    }
+      },2200);
 
+    },700);
+
+  }else{
+
+    response.innerHTML =
+      '<span class="red">' +
+      fails[attempts % fails.length] +
+      '</span>';
+
+    attempts++;
+  }
+}
+
+
+/* HINT SYSTEM */
+
+let hintLevel = 0;
+
+function getHint(){
+
+  const hintText =
+    document.getElementById("hintText");
+
+  const counter =
+    document.getElementById("hintCounter");
+
+
+  if(hintLevel === 0){
+
+    hintText.innerHTML =
+      "HINT 01 // Ignore the year.";
+
+    hintLevel = 1;
+
+    counter.innerHTML = "[1/2]";
+
+  }else if(hintLevel === 1){
+
+    hintText.innerHTML =
+      "HINT 02 // Keep one number. Move forward.";
+
+    hintLevel = 2;
+
+    counter.innerHTML = "[2/2]";
+
+  }else{
+
+    hintText.innerHTML =
+      "NO MORE HINTS // You're on your own, Player 02.";
+  }
+
+}
+
+
+/* MISSION */
+
+function openMission(){
+  showOnly("weekend");
 }
 
 </script>
