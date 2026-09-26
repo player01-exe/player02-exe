@@ -6,9 +6,7 @@
 <title>PLAYER_02.exe</title>
 
 <style>
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -26,21 +24,12 @@ body {
   margin: auto;
 }
 
-.screen.active {
-  display: block;
-}
+.screen.active { display: block; }
 
-.green {
-  color: #00ff66;
-}
-
-.dim {
-  color: #777;
-}
-
-.center {
-  text-align: center;
-}
+.green { color: #00ff66; }
+.dim { color: #777; }
+.center { text-align: center; }
+.hidden { display: none; }
 
 .big {
   font-size: 34px;
@@ -54,9 +43,7 @@ body {
   letter-spacing: 1px;
 }
 
-.small {
-  font-size: 13px;
-}
+.small { font-size: 13px; }
 
 .line {
   border-top: 1px solid #292929;
@@ -161,10 +148,6 @@ input {
   margin: 20px 0;
 }
 
-.hidden {
-  display: none;
-}
-
 .quote {
   color: #999;
   font-style: italic;
@@ -189,10 +172,11 @@ input {
 
 <!-- EARLY ACCESS -->
 <section id="early" class="screen">
+
   <div class="status">● PLAYER 02 // DETECTED</div>
 
   <p>> IDENTITY FOUND.</p>
-  <p>> CHECKING EVENT DATABASE...</p>
+  <p>> CHECKING GAME DATABASE...</p>
   <p>> FIRST UNLOCK FOUND.</p>
 
   <div class="line"></div>
@@ -218,11 +202,13 @@ input {
     Nice try.<br><br>
     PLAYER 01 expected this.
   </div>
+
 </section>
 
 
-<!-- EVENT ACTIVE -->
+<!-- FIRST UNLOCK ACTIVE -->
 <section id="event" class="screen">
+
   <div class="status">● PLAYER 02 // ONLINE</div>
 
   <p>> DATE VERIFIED <span class="green">✓</span></p>
@@ -232,6 +218,7 @@ input {
   <div class="line"></div>
 
   <div class="center">
+
     <p class="title">PLAYER 02...</p>
 
     <p style="margin-top:40px;">
@@ -242,14 +229,17 @@ input {
     <p class="green" style="margin-top:30px;">
       Cute.
     </p>
+
   </div>
 
   <button onclick="showGuess()">[ PROVE IT ]</button>
+
 </section>
 
 
 <!-- GUESS -->
 <section id="guess" class="screen">
+
   <div class="status">MISSION_00 // ACTIVE</div>
 
   <p class="title">IDENTIFY THE ITEM.</p>
@@ -268,11 +258,13 @@ input {
   <button onclick="checkItem()">[ SUBMIT ]</button>
 
   <div id="guessResponse"></div>
+
 </section>
 
 
-<!-- NOT ELIGIBLE -->
+<!-- FLOWERS / DENIED -->
 <section id="denied" class="screen">
+
   <div class="status">ITEM IDENTIFIED ✓</div>
 
   <p class="title green">HOT WHEELS?</p>
@@ -291,9 +283,7 @@ input {
     <p>YELLOW FLOWERS: <strong>0</strong></p>
   </div>
 
-  <p class="error">
-    ERROR.
-  </p>
+  <p class="error">ERROR.</p>
 
   <p>
     According to the rules,<br><br>
@@ -302,11 +292,13 @@ input {
   </p>
 
   <button onclick="showOverride()">[ WELL... NOW WHAT? ]</button>
+
 </section>
 
 
 <!-- OVERRIDE -->
 <section id="override" class="screen">
+
   <p>> SEARCHING FOR ALTERNATIVE...</p>
   <p>> RULE EXCEPTION FOUND.</p>
   <p>> OVERRIDE REQUESTED...</p>
@@ -316,7 +308,10 @@ input {
   </div>
 
   <div class="green-box">
-    <p class="green"><strong>OVERRIDE DETECTED.</strong></p>
+
+    <p class="green">
+      <strong>OVERRIDE DETECTED.</strong>
+    </p>
 
     <p>
       PLAYER 01 DOESN'T FOLLOW<br>
@@ -330,6 +325,7 @@ input {
     <p class="title">
       "Ni modo."
     </p>
+
   </div>
 
   <p class="green">
@@ -337,11 +333,13 @@ input {
   </p>
 
   <button onclick="unlockRide()">[ CONTINUE ]</button>
+
 </section>
 
 
-<!-- HOT WHEELS UNLOCK -->
+<!-- HOT WHEELS -->
 <section id="ride" class="screen">
+
   <div class="status">LEVEL 01 // UNLOCKED ✓</div>
 
   <div class="center">
@@ -369,12 +367,42 @@ input {
     PENDING...
   </p>
 
-  <button onclick="itemAcquired()">[ ITEM ACQUIRED ✓ ]</button>
+  <button onclick="showDeliveryCode()">
+    [ VERIFY DELIVERY ]
+  </button>
+
+  <div id="deliveryVerify" class="hidden" style="margin-top:30px;">
+
+    <p class="green">
+      PLAYER 01 CONFIRMATION REQUIRED.
+    </p>
+
+    <p class="dim">
+      Find the delivery code on your item.
+    </p>
+
+    <input
+      id="deliveryCode"
+      type="text"
+      placeholder="ENTER DELIVERY CODE..."
+      autocomplete="off"
+    >
+
+    <button onclick="verifyDelivery()">
+      [ CONFIRM ]
+    </button>
+
+    <div id="deliveryResponse"></div>
+
+  </div>
+
 </section>
 
 
 <!-- ITEM REGISTERED -->
 <section id="registered" class="screen">
+
+  <p>> DELIVERY VERIFIED <span class="green">✓</span></p>
   <p>> ITEM REGISTERED.</p>
   <p>> UPDATING INVENTORY...</p>
   <p>> LEVEL 01 COMPLETE <span class="green">✓</span></p>
@@ -392,19 +420,26 @@ input {
     Searching memory database...
   </p>
 
-  <button onclick="showOrigin()">[ ACCESS MEMORY ]</button>
+  <button onclick="showOrigin()">
+    [ ACCESS MEMORY ]
+  </button>
+
 </section>
 
 
-<!-- ORIGIN -->
+<!-- ORIGIN MEMORY -->
 <section id="origin" class="screen">
-  <div class="status">MEMORY DATABASE // FILE_00</div>
+
+  <div class="status">
+    MEMORY DATABASE // FILE_00
+  </div>
 
   <p class="green">
     ORIGIN MEMORY RECOVERED ✓
   </p>
 
   <div class="center">
+
     <p class="big">05.06.26</p>
 
     <div class="emoji">💋</div>
@@ -412,6 +447,7 @@ input {
 
     <div class="emoji">🍾</div>
     <p>FIRST ITEM ACQUIRED</p>
+
   </div>
 
   <div class="line"></div>
@@ -428,19 +464,25 @@ input {
     Or at least... before you knew it did.
   </p>
 
-  <button onclick="showHistory()">[ CONTINUE ]</button>
+  <button onclick="showHistory()">
+    [ CONTINUE ]
+  </button>
+
 </section>
 
 
 <!-- HISTORY -->
 <section id="history" class="screen">
+
   <p>> ORIGIN MEMORY ARCHIVED <span class="green">✓</span></p>
   <p>> SEARCHING EVENT DATABASE...</p>
   <p>> PREVIOUS EVENT FOUND.</p>
 
   <div class="line"></div>
 
-  <div class="status">PLAYER_02.exe</div>
+  <div class="status">
+    PLAYER_02.exe
+  </div>
 
   <p>GAME PROGRESS // 30%</p>
 
@@ -449,7 +491,10 @@ input {
   </div>
 
   <div class="box">
-    <p class="green"><strong>EVENT 01 // CO-OP ✓</strong></p>
+
+    <p class="green">
+      <strong>EVENT 01 // CO-OP ✓</strong>
+    </p>
 
     <p class="title">30.07.26</p>
 
@@ -465,9 +510,11 @@ input {
     <p class="quote">
       "A pattern doesn't exist until it repeats."
     </p>
+
   </div>
 
   <div class="green-box">
+
     <p class="green">
       <strong>LEVEL 01 // NEW RIDE ✓</strong>
     </p>
@@ -479,16 +526,22 @@ input {
     <p class="dim">
       You've unlocked a new ride.
     </p>
+
   </div>
 
-  <button onclick="showMission()">[ CONTINUE ]</button>
+  <button onclick="showMission()">
+    [ CONTINUE ]
+  </button>
+
 </section>
 
 
-<!-- CO-OP MISSION -->
+<!-- MISSION -->
 <section id="mission" class="screen">
 
-  <div class="status">CO-OP MISSION AVAILABLE</div>
+  <div class="status">
+    CO-OP MISSION AVAILABLE
+  </div>
 
   <p class="title">
     MISSION_01
@@ -515,7 +568,9 @@ input {
     PLAYER 02 chooses the route.
   </p>
 
+
   <div class="route">
+
     <div class="route-title">
       🌲 ROUTE A // TOUCH GRASS
     </div>
@@ -527,21 +582,29 @@ input {
     <p class="dim small">
       BONUS: choose the soundtrack.
     </p>
+
   </div>
 
+
   <div class="route">
+
     <div class="route-title">
       🌃 ROUTE B // AFTER HOURS
     </div>
 
-    <p>Plan something after sunset.</p>
+    <p>
+      Plan something after sunset.
+    </p>
 
     <p class="dim">
       No usual spots.
     </p>
+
   </div>
 
+
   <div class="route">
+
     <div class="route-title">
       🎲 ROUTE C // CHAOS MODE
     </div>
@@ -552,9 +615,12 @@ input {
       ONE RULE:<br>
       PLAYER 01 can't know beforehand.
     </p>
+
   </div>
 
+
   <div class="route">
+
     <div class="route-title">
       CREATE YOUR OWN MISSION
     </div>
@@ -570,7 +636,9 @@ input {
     <p class="green">
       That's it.
     </p>
+
   </div>
+
 
   <div class="line"></div>
 
@@ -582,6 +650,7 @@ input {
   <p class="green center">
     GOOD THINGS DON'T NEED A DEADLINE.
   </p>
+
 
   <div class="green-box center" style="margin-top:40px;">
 
@@ -606,13 +675,17 @@ input {
     <p class="dim">
       Play it during the mission.
     </p>
+
   </div>
 
-  <button onclick="showLevel2()">[ VIEW NEXT LEVEL ]</button>
+  <button onclick="showLevel2()">
+    [ VIEW NEXT LEVEL ]
+  </button>
+
 </section>
 
 
-<!-- LEVEL 2 -->
+<!-- LEVEL 02 -->
 <section id="level2" class="screen">
 
   <div class="status">
@@ -654,7 +727,7 @@ input {
     to be found yet.
   </p>
 
-  <div style="margin-top:70px;" class="center">
+  <div class="center" style="margin-top:70px;">
 
     <p class="green">
       PLAYER 02
@@ -680,27 +753,25 @@ input {
 <script>
 
 function showScreen(id) {
+
   document.querySelectorAll(".screen").forEach(screen => {
     screen.classList.remove("active");
   });
 
   document.getElementById(id).classList.add("active");
+
   window.scrollTo(0, 0);
 }
 
 
-/*
-  EVENT DATE:
-  September 30, 2026
-
-  The site checks the visitor's device date.
-*/
+/* FIRST UNLOCK = 30 SEPTEMBER 2026 */
 
 function startGame() {
 
   const now = new Date();
 
-  const unlockDate = new Date(2026, 8, 30, 0, 0, 0);
+  const unlockDate =
+    new Date(2026, 8, 30, 0, 0, 0);
 
   if (now < unlockDate) {
     showScreen("early");
@@ -711,6 +782,7 @@ function startGame() {
 
 
 function tryEarly() {
+
   document
     .getElementById("earlyMessage")
     .classList.remove("hidden");
@@ -718,20 +790,23 @@ function tryEarly() {
 
 
 function showGuess() {
+
   showScreen("guess");
 }
 
 
 function checkItem() {
 
-  const input = document
-    .getElementById("itemGuess")
-    .value
-    .trim()
-    .toLowerCase();
+  const input =
+    document
+      .getElementById("itemGuess")
+      .value
+      .trim()
+      .toLowerCase();
 
   const response =
     document.getElementById("guessResponse");
+
 
   if (
     input.includes("hot wheels") ||
@@ -752,51 +827,108 @@ function checkItem() {
     ];
 
     const random =
-      messages[Math.floor(Math.random() * messages.length)];
+      messages[
+        Math.floor(Math.random() * messages.length)
+      ];
 
     response.innerHTML =
-      '<p class="error">' + random + '</p>';
+      '<p class="error">' +
+      random +
+      '</p>';
   }
 }
 
 
 function showOverride() {
+
   showScreen("override");
 }
 
 
 function unlockRide() {
+
   showScreen("ride");
 }
 
 
-function itemAcquired() {
+/* DELIVERY VERIFICATION */
 
-  localStorage.setItem(
-    "player02_item_acquired",
-    "true"
-  );
+function showDeliveryCode() {
 
-  showScreen("registered");
+  document
+    .getElementById("deliveryVerify")
+    .classList.remove("hidden");
+
+  document
+    .getElementById("deliveryVerify")
+    .scrollIntoView({
+      behavior: "smooth"
+    });
+}
+
+
+function verifyDelivery() {
+
+  const code =
+    document
+      .getElementById("deliveryCode")
+      .value
+      .trim()
+      .toUpperCase();
+
+  const response =
+    document.getElementById("deliveryResponse");
+
+
+  if (code === "RIDE02") {
+
+    response.innerHTML =
+      '<p class="success">' +
+      'DELIVERY VERIFIED ✓<br><br>' +
+      'ITEM REGISTERED.' +
+      '</p>';
+
+    localStorage.setItem(
+      "player02_item_acquired",
+      "true"
+    );
+
+    setTimeout(function() {
+      showScreen("registered");
+    }, 1200);
+
+  } else {
+
+    response.innerHTML =
+      '<p class="error">' +
+      'VERIFICATION FAILED.<br><br>' +
+      'Nice try, Player 02.<br>' +
+      'You need the actual item.' +
+      '</p>';
+  }
 }
 
 
 function showOrigin() {
+
   showScreen("origin");
 }
 
 
 function showHistory() {
+
   showScreen("history");
 }
 
 
 function showMission() {
+
   showScreen("mission");
 }
 
 
 function showLevel2() {
+
   showScreen("level2");
 }
 
